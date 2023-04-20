@@ -477,7 +477,7 @@ def is_openai_api_key(key):
 def read_single_conf_with_lru_cache(arg):
     from colorful import print亮红, print亮绿
     try:
-        r = getattr(importlib.import_module('config_private'), arg)
+        r = getattr(importlib.import_module('private_config'), arg)
     except:
         r = getattr(importlib.import_module('config'), arg)
     # 在读取API_KEY时，检查一下是不是忘了改config
@@ -486,7 +486,7 @@ def read_single_conf_with_lru_cache(arg):
             print亮绿(f"[API_KEY] 您的 API_KEY 是: {r[:15]}*** API_KEY 导入成功")
         else:
             print亮红( "[API_KEY] 正确的 API_KEY 是 'sk-' + '48 位大小写字母数字' 的组合，请在config文件中修改API密钥, 添加海外代理之后再运行。" + \
-                "（如果您刚更新过代码，请确保旧版config_private文件中没有遗留任何新增键值）")
+                "（如果您刚更新过代码，请确保旧版private_config文件中没有遗留任何新增键值）")
     if arg == 'proxies':
         if r is None:
             print亮红('[PROXY] 网络代理状态：未配置。无代理状态下很可能无法访问。建议：检查USE_PROXY选项是否修改。')
@@ -497,7 +497,7 @@ def read_single_conf_with_lru_cache(arg):
 
 
 def get_conf(*args):
-    # 建议您复制一个config_private.py放自己的秘密, 如API和代理网址, 避免不小心传github被别人看到
+    # 建议您复制一个private_config.py放自己的秘密, 如API和代理网址, 避免不小心传github被别人看到
     res = []
     for arg in args:
         r = read_single_conf_with_lru_cache(arg)

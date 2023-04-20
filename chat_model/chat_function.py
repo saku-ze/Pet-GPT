@@ -222,6 +222,8 @@ class ChatDialogBody(QDialog):
     def closeEvent(self, event):
         self.context_history = [[],[]]
         event.accept()
+        self.open_ai.exit()
+
         # self.parent().closed.connect(self.parent().set_chat_window_closed)
         # # 发送 chat_window_closed 信号
         # self.chat_window_closed.emit()
